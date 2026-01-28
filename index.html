@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taleika Films – Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --dark:#282924;
+    --light:#ffffff;
+    --magenta:#c4029d;
+}
+	/* CONTENEDOR GENERAL PARA CENTRAR CONTENIDO */
+.section-inner{
+    max-width:1200px;
+    margin:0 auto;
+}
+
+/* GRID ESPECÍFICO PARA VIDEOS VERTICALES */
+.video-grid.vertical-grid{
+    max-width:900px;
+    margin:0 auto;
+}
+
+/* LIMITAMOS EL ANCHO DE LOS VERTICALES */
+.video-wrapper.vertical{
+    max-width:260px;
+    width:100%;
+}
+	/* RESÚMENES EN VIVO – VIDEO ÚNICO CENTRADO */
+.video-grid.single {
+    grid-template-columns: 1fr;
+    place-items: center;
+}
+
+.video-grid.single .video-wrapper {
+    max-width: 820px;
+    width: 100%;
+}
+/* BOTÓN INSTAGRAM */
+.instagram-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    padding:14px 26px;
+    border:2px solid var(--magenta);
+    border-radius:50px;
+    color:var(--magenta);
+    font-weight:500;
+    text-decoration:none;
+    transition:all .3s ease;
+    margin-bottom:25px;
+}
+
+.instagram-btn img{
+    width:26px;
+    height:26px;
+}
+
+.instagram-btn:hover{
+    background:var(--magenta);
+    color:#fff;
+    transform:translateY(-2px);
+}
+
+.instagram-btn:hover img{
+    filter:invert(1);
+}
+	/* CIERRE INSTAGRAM */
+.instagram-close{
+    display:inline-flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    margin-bottom:35px;
+    transition:transform .3s ease, opacity .3s ease;
+}
+
+.instagram-close img{
+    width:120px;           /* similar al logo */
+    height:auto;
+    opacity:.85;
+    transition:opacity .3s ease, transform .3s ease;
+}
+
+.instagram-close span{
+    font-size:.95rem;
+    letter-spacing:.15rem;
+    color:#555;
+    opacity:.75;
+}
+
+.instagram-close:hover img{
+    opacity:1;
+    transform:scale(1.05);
+}
+
+.instagram-close:hover span{
+    opacity:1;
+}
+
+/* BOTÓN WHATSAPP DESTACADO */
+.whatsapp-btn{
+    display:inline-block;
+    margin-top:10px;
+    font-size:1.35rem;
+    font-weight:700;
+    color:#111;
+    background:#f5f5f5;
+    padding:18px 34px;
+    border-radius:60px;
+    text-decoration:none;
+    transition:all .3s ease;
+}
+
+.whatsapp-btn:hover{
+    background:var(--magenta);
+    color:#fff;
+    transform:translateY(-2px);
+}
+
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Roboto', sans-serif;
+    font-weight:100;
+    line-height:1.7;
+    color:#111;
+    overflow-x:hidden;
+}
+
+/* SECCIONES */
+section{padding:80px 6%;}
+.dark{background:var(--dark);color:#fff;}
+.light{background:var(--light);}
+
+h2{
+    font-weight:500;
+    font-size:2.1rem;
+    text-transform:uppercase;
+    letter-spacing:.5rem;
+    text-align:center;
+    margin-bottom:40px;
+}
+
+section.light h2{color:#222;}
+section.dark h2{color:#f1f1f1;}
+
+/* SEPARADOR */
+.separator{
+    width:100%;
+    height:8px;
+    background:var(--magenta);
+}
+
+/* HERO */
+.hero-video{
+    position:relative;
+    height:100vh;
+    overflow:hidden;
+}
+
+.hero-video video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:opacity .6s ease;
+}
+
+.hero-video video.loaded{opacity:1;}
+
+.hero-video::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.55);
+}
+
+.hero-video-content{
+    position:relative;
+    z-index:2;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-video-content img{
+    width:320px;
+    filter:invert(1);
+}
+
+/* QUIENES SOMOS */
+.hero-title{padding:60px 6%;}
+
+/* ABOUT */
+.hero-about-video{
+    position:relative;
+    height:65vh;
+    overflow:hidden;
+}
+
+.hero-about-video video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero-about-video::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.65);
+}
+
+.hero-about-content{
+    position:relative;
+    z-index:2;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 20px;
+}
+
+.hero-about-content p{
+    max-width:820px;
+    font-size:1.4rem;
+    color:#f1f1f1;
+}
+
+/* VIDEOS */
+.video-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
+}
+
+.video-wrapper{
+    position:relative;
+    padding-top:56.25%;
+    border-radius:16px;
+    overflow:hidden;
+    cursor:pointer;
+    background-size:cover;
+    background-position:center;
+    transition:transform .35s ease, box-shadow .35s ease;
+}
+/* FORMATO VERTICAL 9:16 */
+.video-wrapper.vertical{
+    padding-top:177%;
+}
+
+.video-wrapper:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+.video-wrapper iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+.video-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background .3s ease;
+}
+
+.video-wrapper:hover .video-overlay{
+    background:rgba(0,0,0,.45);
+}
+
+.video-wrapper.playing .video-overlay{display:none;}
+
+.play-btn{
+    width:80px;
+    height:80px;
+    border:2px solid var(--magenta);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.play-btn::before{
+    content:"";
+    border-left:20px solid var(--magenta);
+    border-top:12px solid transparent;
+    border-bottom:12px solid transparent;
+    margin-left:6px;
+}
+
+.video-caption{
+    margin-top:14px;
+    font-size:.95rem;
+    opacity:.75;
+    text-align:center;
+}
+
+/* INVITACIONES */
+.invite-grid{
+    display:grid;
+    gap:40px;
+}
+
+.invite-links{
+    display:grid;
+    gap:30px;
+    text-align:center;
+}
+
+.invite-card{
+    padding:30px;
+    border:1px solid #ddd;
+}
+
+.invite-card a{
+    color:var(--magenta);
+    text-decoration:none;
+    font-weight:500;
+}
+
+/* CONTACTO */
+.contact{
+    text-align:center;
+    padding:120px 6%;
+}
+
+.contact img{width:180px;margin-bottom:40px;}
+
+.contact-text{
+    font-size:1.6rem;
+    max-width:680px;
+    margin:0 auto 50px;
+    opacity:0;
+    transform:translateY(40px);
+    transition:all 1.2s ease;
+}
+
+.contact-links{
+    opacity:0;
+    transform:translateY(30px);
+    transition:all 1.2s ease .4s;
+}
+
+.contact.active .contact-text,
+.contact.active .contact-links{
+    opacity:1;
+    transform:none;
+}
+
+.contact-links a{
+    color:var(--magenta);
+    text-decoration:none;
+    display:block;
+    margin-top:15px;
+    font-size:1.1rem;
+}
+
+/* REVEAL */
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:.8s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:none;
+}
+
+/* DESKTOP */
+@media(min-width:768px){
+    .video-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .invite-grid{
+        justify-items:center;
+    }
+}
+
+
+    /* INVITACIONES CENTRADO */
+    .invite-grid{
+        display:flex;
+        justify-content:center;
+    }
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .hero-video-content img{width:220px;}
+    .hero-about-video{height:75vh;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero-video">
+<video id="particlesVideo" muted playsinline preload="metadata">
+<source src="images/particles.mp4" type="video/mp4">
+</video>
+<div class="hero-video-content">
+<img src="images/LOGO TK.svg">
+</div>
+</section>
+
+<div class="separator"></div>
+
+<section class="light hero-title reveal">
+<h2>¿Quiénes somos?</h2>
+</section>
+
+<section class="hero-about-video reveal">
+<video autoplay muted loop playsinline>
+<source src="images/particles.mp4">
+</video>
+<div class="hero-about-content">
+<p>Somos Ana y Fer. Capturamos emociones reales y las convertimos en recuerdos inolvidables.</p>
+</div>
+</section>
+
+<div class="separator"></div>
+
+<!-- RESÚMENES --> <section class="light reveal"> <h2>Resúmenes</h2> <div class="video-grid"> <div class="video-wrapper" data-id="h1NseAptLm8" style="background-image:url('images/resumen1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div> <div class="video-wrapper" data-id="z-M6JYYeQD8" style="background-image:url('images/resumen2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div> <div class="video-wrapper" data-id="SfiWYv8l4Pg" style="background-image:url('images/resumen3.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div> </div> </section> <div class="separator"></div>
+
+<!-- ENTRADAS -->
+<section class="dark reveal">
+<h2>Videos de entrada</h2>
+<div class="video-grid">
+
+<div>
+<div class="video-wrapper" data-id="w00aeRGoZxU" style="background-image:url('images/entrada1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<p class="video-caption">Video de entrada con edición en vivo de la previa y planos en el salón.</p>
+</div>
+
+<div>
+<div class="video-wrapper" data-id="Rhu4Rf-Lf1c" style="background-image:url('images/entrada2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<p class="video-caption">Entrada tipo fashion film con locaciones nocturnas como bares.</p>
+</div>
+
+<div>
+<div class="video-wrapper" data-id="Z8CgRyBpbRs" style="background-image:url('images/entrada3.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<p class="video-caption">Entrada fashion film diurno.</p>
+</div>
+
+<div>
+<div class="video-wrapper" data-id="MYG6UgqS24Y" style="background-image:url('images/entrada4.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<p class="video-caption">Entrada mix entre locaciones naturales y nocturnas.</p>
+</div>
+
+</div>
+</section>
+
+<div class="separator"></div>
+
+<!-- SALSAS -->
+<section class="light reveal">
+<h2>Salsas</h2>
+<div class="video-grid">
+<div class="video-wrapper" data-id="gFfYrCY0v4I" style="background-image:url('images/salsa1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="42gyHB2vT4s" style="background-image:url('images/salsa2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="2FBDzXbxd6A" style="background-image:url('images/salsa3.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+</div>
+</section>
+
+<div class="separator"></div>
+
+<!-- CRONOLOGICOS -->
+<section class="dark reveal">
+<h2>Cronológicos</h2>
+<div class="video-grid">
+<div class="video-wrapper" data-id="bdnr9KK1jeI" style="background-image:url('images/cronologico1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="8pLrT3ZxxYk" style="background-image:url('images/cronologico2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="7EEDJko0D3s" style="background-image:url('images/cronologico3.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+</div>
+</section>
+
+<div class="separator"></div>
+
+<!-- INVITACIONES -->
+<section class="light reveal">
+<h2>Invitaciones</h2>
+
+<div class="invite-grid">
+
+    <!-- VIDEOS DE INVITACIÓN -->
+<div class="video-grid vertical-grid">
+
+        <div>
+            <div class="video-wrapper vertical"
+                 data-id="52bkOhX4Wm8"
+                 style="background-image:url('images/invitaciones1.jpg')">
+                <div class="video-overlay">
+                    <div class="play-btn"></div>
+                </div>
+            </div>
+            <p class="video-caption">
+                Invitación Digital Motion Graphics con fotos
+            </p>
+        </div>
+
+        <div>
+            <div class="video-wrapper vertical"
+                 data-id="MtmuMtrjono"
+                 style="background-image:url('images/invitaciones2.jpg')">
+                <div class="video-overlay">
+                    <div class="play-btn"></div>
+                </div>
+            </div>
+            <p class="video-caption">
+                Invitación Digital Motion Graphics con video
+            </p>
+        </div>
+
+        <div>
+            <div class="video-wrapper vertical"
+                 style="background-image:url('images/invitaciones3.jpg')"
+                 onclick="window.open('https://taleika.github.io/Isaxv/','_blank')">
+                <!-- INVITACIÓN WEB SIN PLAY -->
+            </div>
+            <p class="video-caption">
+                Micrositio con galería de fotos, confirmación de invitados,
+                cuenta regresiva, ubicación y mucho más.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+</section>
+<div class="separator"></div>
+
+<!-- EN VIVO -->
+<section class="dark reveal">
+<h2>Resúmenes en vivo</h2>
+<div class="video-grid single">
+<div class="video-wrapper" data-id="zPUgT9P1m3g" style="background-image:url('images/envivo2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+</div>
+</section>
+
+<div class="separator"></div>
+
+<!-- CONTACTO -->
+<section class="light contact reveal">
+    <img src="images/LOGO TK.svg">
+
+    <p class="contact-text">
+        ¿Querés ver más?<br>
+        Entrá a nuestro Instagram y descubrí todos los resúmenes.<br>
+       
+  </p>
+
+    <div class="contact-links">
+
+        <a href="https://instagram.com/taleikafilms"
+           target="_blank"
+           class="instagram-close"
+           aria-label="Instagram Taleika Films">
+
+            <img src="images/icono-instagram.svg" alt="Instagram Taleika Films">
+        </a><span>@taleikafilms</span>
+
+        <a href="https://wa.me/5491131844652"
+           target="_blank"
+           class="whatsapp-btn">
+           ¡Hacé click y contanos por WhatsApp! 11 3184 4652
+        </a>
+
+    </div>
+</section>
+
+<script>
+// HERO VIDEO
+const video = document.getElementById('particlesVideo');
+const isMobile = matchMedia('(max-width:768px)').matches;
+
+video.addEventListener('loadedmetadata',()=>{
+    video.classList.add('loaded');
+    if(isMobile){
+        video.loop = true;
+        video.play();
+    }
+});
+
+if(!isMobile){
+    let current=0,target=0,duration;
+    video.addEventListener('loadedmetadata',()=>duration=video.duration);
+    function animate(){
+        current += (target-current)*.08;
+        video.currentTime = current;
+        requestAnimationFrame(animate);
+    }
+    animate();
+    addEventListener('scroll',()=>{
+        const max = document.body.scrollHeight-innerHeight;
+        target = (scrollY/max)*duration;
+    });
+}
+
+// PLAY VIDEOS
+document.querySelectorAll('.video-wrapper').forEach(v=>{
+v.addEventListener('click',()=>{
+if(v.classList.contains('playing'))return;
+const id=v.dataset.id;
+if(!id) return;
+v.classList.add('playing');
+v.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allow="autoplay" allowfullscreen></iframe>`;
+});
+});
+
+// REVEAL
+const io=new IntersectionObserver(e=>{
+e.forEach(x=>{
+if(x.isIntersecting){
+x.target.classList.add('active');
+io.unobserve(x.target);
+}
+});
+},{threshold:.2});
+
+document.querySelectorAll('.reveal').forEach(r=>io.observe(r));
+</script>
+
+</body>
+</html>
