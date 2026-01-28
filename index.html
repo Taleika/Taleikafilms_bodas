@@ -9,121 +9,47 @@
 
 <style>
 :root{
-    --dark:#282924;
+    --dark:#869895;
     --light:#ffffff;
-    --magenta:#c4029d;
+    --magenta:#223835;
 }
-	/* CONTENEDOR GENERAL PARA CENTRAR CONTENIDO */
+
+/* CONTENEDOR GENERAL */
 .section-inner{
     max-width:1200px;
     margin:0 auto;
 }
 
-/* GRID ESPECÍFICO PARA VIDEOS VERTICALES */
+/* GRID VERTICALES */
 .video-grid.vertical-grid{
     max-width:900px;
     margin:0 auto;
 }
 
-/* LIMITAMOS EL ANCHO DE LOS VERTICALES */
 .video-wrapper.vertical{
     max-width:260px;
     width:100%;
-}
-	/* RESÚMENES EN VIVO – VIDEO ÚNICO CENTRADO */
-.video-grid.single {
-    grid-template-columns: 1fr;
-    place-items: center;
+    padding-top:177%;
 }
 
-.video-grid.single .video-wrapper {
-    max-width: 820px;
-    width: 100%;
-}
-/* BOTÓN INSTAGRAM */
-.instagram-btn{
-    display:inline-flex;
-    align-items:center;
+/* GRID GENERAL */
+.video-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
     justify-content:center;
-    gap:14px;
-    padding:14px 26px;
-    border:2px solid var(--magenta);
-    border-radius:50px;
-    color:var(--magenta);
-    font-weight:500;
-    text-decoration:none;
-    transition:all .3s ease;
-    margin-bottom:25px;
 }
 
-.instagram-btn img{
-    width:26px;
-    height:26px;
+/* GRID PARA SECCIONES CON 1 VIDEO */
+.video-grid.single{
+    grid-template-columns:repeat(3,1fr);
+    place-items:center;
 }
 
-.instagram-btn:hover{
-    background:var(--magenta);
-    color:#fff;
-    transform:translateY(-2px);
+.video-grid.single .video-wrapper{
+    max-width:none;
+    width:100%;
 }
-
-.instagram-btn:hover img{
-    filter:invert(1);
-}
-	/* CIERRE INSTAGRAM */
-.instagram-close{
-    display:inline-flex;
-    flex-direction:column;
-    align-items:center;
-    gap:12px;
-    text-decoration:none;
-    margin-bottom:35px;
-    transition:transform .3s ease, opacity .3s ease;
-}
-
-.instagram-close img{
-    width:120px;           /* similar al logo */
-    height:auto;
-    opacity:.85;
-    transition:opacity .3s ease, transform .3s ease;
-}
-
-.instagram-close span{
-    font-size:.95rem;
-    letter-spacing:.15rem;
-    color:#555;
-    opacity:.75;
-}
-
-.instagram-close:hover img{
-    opacity:1;
-    transform:scale(1.05);
-}
-
-.instagram-close:hover span{
-    opacity:1;
-}
-
-/* BOTÓN WHATSAPP DESTACADO */
-.whatsapp-btn{
-    display:inline-block;
-    margin-top:10px;
-    font-size:1.35rem;
-    font-weight:700;
-    color:#111;
-    background:#f5f5f5;
-    padding:18px 34px;
-    border-radius:60px;
-    text-decoration:none;
-    transition:all .3s ease;
-}
-
-.whatsapp-btn:hover{
-    background:var(--magenta);
-    color:#fff;
-    transform:translateY(-2px);
-}
-
 
 /* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -149,9 +75,6 @@ h2{
     text-align:center;
     margin-bottom:40px;
 }
-
-section.light h2{color:#222;}
-section.dark h2{color:#f1f1f1;}
 
 /* SEPARADOR */
 .separator{
@@ -200,9 +123,6 @@ section.dark h2{color:#f1f1f1;}
     filter:invert(1);
 }
 
-/* QUIENES SOMOS */
-.hero-title{padding:60px 6%;}
-
 /* ABOUT */
 .hero-about-video{
     position:relative;
@@ -242,13 +162,7 @@ section.dark h2{color:#f1f1f1;}
     color:#f1f1f1;
 }
 
-/* VIDEOS */
-.video-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:40px;
-}
-
+/* VIDEO WRAPPER */
 .video-wrapper{
     position:relative;
     padding-top:56.25%;
@@ -258,10 +172,6 @@ section.dark h2{color:#f1f1f1;}
     background-size:cover;
     background-position:center;
     transition:transform .35s ease, box-shadow .35s ease;
-}
-/* FORMATO VERTICAL 9:16 */
-.video-wrapper.vertical{
-    padding-top:177%;
 }
 
 .video-wrapper:hover{
@@ -277,6 +187,7 @@ section.dark h2{color:#f1f1f1;}
     border:none;
 }
 
+/* OVERLAY */
 .video-overlay{
     position:absolute;
     inset:0;
@@ -292,9 +203,10 @@ section.dark h2{color:#f1f1f1;}
 
 .video-wrapper.playing .video-overlay{display:none;}
 
+/* PLAY BUTTON – 50% */
 .play-btn{
-    width:80px;
-    height:80px;
+    width:40px;
+    height:40px;
     border:2px solid var(--magenta);
     border-radius:50%;
     display:flex;
@@ -304,40 +216,10 @@ section.dark h2{color:#f1f1f1;}
 
 .play-btn::before{
     content:"";
-    border-left:20px solid var(--magenta);
-    border-top:12px solid transparent;
-    border-bottom:12px solid transparent;
-    margin-left:6px;
-}
-
-.video-caption{
-    margin-top:14px;
-    font-size:.95rem;
-    opacity:.75;
-    text-align:center;
-}
-
-/* INVITACIONES */
-.invite-grid{
-    display:grid;
-    gap:40px;
-}
-
-.invite-links{
-    display:grid;
-    gap:30px;
-    text-align:center;
-}
-
-.invite-card{
-    padding:30px;
-    border:1px solid #ddd;
-}
-
-.invite-card a{
-    color:var(--magenta);
-    text-decoration:none;
-    font-weight:500;
+    border-left:10px solid var(--magenta);
+    border-top:6px solid transparent;
+    border-bottom:6px solid transparent;
+    margin-left:3px;
 }
 
 /* CONTACTO */
@@ -369,14 +251,6 @@ section.dark h2{color:#f1f1f1;}
     transform:none;
 }
 
-.contact-links a{
-    color:var(--magenta);
-    text-decoration:none;
-    display:block;
-    margin-top:15px;
-    font-size:1.1rem;
-}
-
 /* REVEAL */
 .reveal{
     opacity:0;
@@ -393,18 +267,6 @@ section.dark h2{color:#f1f1f1;}
 @media(min-width:768px){
     .video-grid{
         grid-template-columns:repeat(3,1fr);
-    }
-
-    .invite-grid{
-        justify-items:center;
-    }
-}
-
-
-    /* INVITACIONES CENTRADO */
-    .invite-grid{
-        display:flex;
-        justify-content:center;
     }
 }
 
@@ -445,120 +307,70 @@ section.dark h2{color:#f1f1f1;}
 
 <div class="separator"></div>
 
-<!-- RESÚMENES --> <section class="light reveal"> <h2>Resúmenes</h2> <div class="video-grid"> <div class="video-wrapper" data-id="h1NseAptLm8" style="background-image:url('images/resumen1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div> <div class="video-wrapper" data-id="z-M6JYYeQD8" style="background-image:url('images/resumen2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div> <div class="video-wrapper" data-id="SfiWYv8l4Pg" style="background-image:url('images/resumen3.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div> </div> </section> <div class="separator"></div>
-
-<!-- ENTRADAS -->
-<section class="dark reveal">
-<h2>Videos de entrada</h2>
-<div class="video-grid">
-
-<div>
-<div class="video-wrapper" data-id="w00aeRGoZxU" style="background-image:url('images/entrada1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
-<p class="video-caption">Video de entrada con edición en vivo de la previa y planos en el salón.</p>
-</div>
-
-<div>
-<div class="video-wrapper" data-id="Rhu4Rf-Lf1c" style="background-image:url('images/entrada2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
-<p class="video-caption">Entrada tipo fashion film con locaciones nocturnas como bares.</p>
-</div>
-
-<div>
-<div class="video-wrapper" data-id="Z8CgRyBpbRs" style="background-image:url('images/entrada3.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
-<p class="video-caption">Entrada fashion film diurno.</p>
-</div>
-
-<div>
-<div class="video-wrapper" data-id="MYG6UgqS24Y" style="background-image:url('images/entrada4.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
-<p class="video-caption">Entrada mix entre locaciones naturales y nocturnas.</p>
-</div>
-
-</div>
-</section>
-
-<div class="separator"></div>
-
-<!-- SALSAS -->
+<!-- RESÚMENES -->
 <section class="light reveal">
-<h2>Salsas</h2>
+<h2>Resúmenes</h2>
 <div class="video-grid">
-<div class="video-wrapper" data-id="gFfYrCY0v4I" style="background-image:url('images/salsa1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
-<div class="video-wrapper" data-id="42gyHB2vT4s" style="background-image:url('images/salsa2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
-<div class="video-wrapper" data-id="2FBDzXbxd6A" style="background-image:url('images/salsa3.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="ZLofxD0G5o8" style="background-image:url('images/resumen1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="AkEy5vrAZZc" style="background-image:url('images/resumen2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="rYBnXTM_rrM" style="background-image:url('images/resumen3.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="u13A6h-0kSw" style="background-image:url('images/resumen4.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="RVYTeZIDnBc" style="background-image:url('images/resumen5.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="tMN5_h3aGXo" style="background-image:url('images/resumen6.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
 </div>
 </section>
 
 <div class="separator"></div>
 
-<!-- CRONOLOGICOS -->
+<!-- CIVIL -->
 <section class="dark reveal">
+<h2>Cobertura Civil</h2>
+<div class="video-grid">
+<div class="video-wrapper" data-id="YR6-E8IfrkI" style="background-image:url('images/civil1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="s_5_ylgNTLM" style="background-image:url('images/civil2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+</div>
+</section>
+
+<div class="separator"></div>
+
+<!-- CRONO -->
+<section class="light reveal">
 <h2>Cronológicos</h2>
 <div class="video-grid">
-<div class="video-wrapper" data-id="bdnr9KK1jeI" style="background-image:url('images/cronologico1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
-<div class="video-wrapper" data-id="8pLrT3ZxxYk" style="background-image:url('images/cronologico2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
-<div class="video-wrapper" data-id="7EEDJko0D3s" style="background-image:url('images/cronologico3.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="rBRmTKxiVnA" style="background-image:url('images/crono1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="is5QxW2rDsg" style="background-image:url('images/crono2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper" data-id="lN8C0tRSxgY" style="background-image:url('images/crono3.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+</div>
+</section>
+
+<div class="separator"></div>
+
+<!-- ENTRADA -->
+<section class="dark reveal">
+<h2>Videos de entrada</h2>
+<div class="video-grid single">
+<div class="video-wrapper" data-id="esm-sFuwVZc" style="background-image:url('images/entrada1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+</div>
+</section>
+
+<div class="separator"></div>
+
+<!-- EN VIVO -->
+<section class="light reveal">
+<h2>Resúmenes en vivo</h2>
+<div class="video-grid single">
+<div class="video-wrapper" data-id="YQABvNSKQ6k" style="background-image:url('images/envivo1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
 </div>
 </section>
 
 <div class="separator"></div>
 
 <!-- INVITACIONES -->
-<section class="light reveal">
-<h2>Invitaciones</h2>
-
-<div class="invite-grid">
-
-    <!-- VIDEOS DE INVITACIÓN -->
-<div class="video-grid vertical-grid">
-
-        <div>
-            <div class="video-wrapper vertical"
-                 data-id="52bkOhX4Wm8"
-                 style="background-image:url('images/invitaciones1.jpg')">
-                <div class="video-overlay">
-                    <div class="play-btn"></div>
-                </div>
-            </div>
-            <p class="video-caption">
-                Invitación Digital Motion Graphics con fotos
-            </p>
-        </div>
-
-        <div>
-            <div class="video-wrapper vertical"
-                 data-id="MtmuMtrjono"
-                 style="background-image:url('images/invitaciones2.jpg')">
-                <div class="video-overlay">
-                    <div class="play-btn"></div>
-                </div>
-            </div>
-            <p class="video-caption">
-                Invitación Digital Motion Graphics con video
-            </p>
-        </div>
-
-        <div>
-            <div class="video-wrapper vertical"
-                 style="background-image:url('images/invitaciones3.jpg')"
-                 onclick="window.open('https://taleika.github.io/Isaxv/','_blank')">
-                <!-- INVITACIÓN WEB SIN PLAY -->
-            </div>
-            <p class="video-caption">
-                Micrositio con galería de fotos, confirmación de invitados,
-                cuenta regresiva, ubicación y mucho más.
-            </p>
-        </div>
-
-    </div>
-
-</div>
-</section>
-<div class="separator"></div>
-
-<!-- EN VIVO -->
 <section class="dark reveal">
-<h2>Resúmenes en vivo</h2>
-<div class="video-grid single">
-<div class="video-wrapper" data-id="zPUgT9P1m3g" style="background-image:url('images/envivo2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<h2>Invitaciones</h2>
+<div class="video-grid vertical-grid">
+<div class="video-wrapper vertical" data-id="F4uuggJt4VE" style="background-image:url('images/invitacion1.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
+<div class="video-wrapper vertical" data-id="XnazShMrtYI" style="background-image:url('images/invitacion2.jpg')"><div class="video-overlay"><div class="play-btn"></div></div></div>
 </div>
 </section>
 
@@ -566,31 +378,17 @@ section.dark h2{color:#f1f1f1;}
 
 <!-- CONTACTO -->
 <section class="light contact reveal">
-    <img src="images/LOGO TK.svg">
-
-    <p class="contact-text">
-        ¿Querés ver más?<br>
-        Entrá a nuestro Instagram y descubrí todos los resúmenes.<br>
-       
-  </p>
-
-    <div class="contact-links">
-
-        <a href="https://instagram.com/taleikafilms"
-           target="_blank"
-           class="instagram-close"
-           aria-label="Instagram Taleika Films">
-
-            <img src="images/icono-instagram.svg" alt="Instagram Taleika Films">
-        </a><span>@taleikafilms</span>
-
-        <a href="https://wa.me/5491131844652"
-           target="_blank"
-           class="whatsapp-btn">
-           ¡Hacé click y contanos por WhatsApp! 11 3184 4652
-        </a>
-
-    </div>
+<img src="images/LOGO TK.svg">
+<p class="contact-text">¿Querés ver más?<br>Entrá a nuestro Instagram y descubrí todos los resúmenes.</p>
+<div class="contact-links">
+<a href="https://instagram.com/taleikafilms" target="_blank" class="instagram-close">
+<img src="images/icono-instagram.svg">
+<span>@taleikafilms</span>
+</a>
+<a href="https://wa.me/5491131844652" target="_blank" class="whatsapp-btn">
+¡Hacé click y contanos por WhatsApp! 11 3184 4652
+</a>
+</div>
 </section>
 
 <script>
